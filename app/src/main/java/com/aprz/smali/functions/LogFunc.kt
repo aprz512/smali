@@ -15,39 +15,48 @@ object LogFunc {
 
     private const val TAG = "&&Log&&"
 
-    private fun logInt(value: Int) {
+    @JvmStatic
+    fun logInt(value: Int) {
         Log.e(TAG, "logInt: $value")
     }
 
-    private fun logDouble(value: Double) {
+    @JvmStatic
+    fun logDouble(value: Double) {
         Log.e(TAG, "logDouble: $value")
     }
 
-    private fun logFloat(value: Float) {
+    @JvmStatic
+    fun logFloat(value: Float) {
         Log.e(TAG, "logFloat: $value")
     }
 
-    private fun logString(value: String) {
+    @JvmStatic
+    fun logString(value: String) {
         Log.e(TAG, "logString: $value")
     }
 
-    private fun logLong(value: Long) {
+    @JvmStatic
+    fun logLong(value: Long) {
         Log.e(TAG, "logLong: $value")
     }
 
-    private fun logShort(value: Short) {
+    @JvmStatic
+    fun logShort(value: Short) {
         Log.e(TAG, "logShort: $value")
     }
 
-    private fun logChar(value: Char) {
+    @JvmStatic
+    fun logChar(value: Char) {
         Log.e(TAG, "logChar: $value")
     }
 
-    private fun logBoolean(value: Boolean) {
+    @JvmStatic
+    fun logBoolean(value: Boolean) {
         Log.e(TAG, "logBoolean: $value")
     }
 
-    private fun logList(value: List<*>) {
+    @JvmStatic
+    fun logList(value: List<*>) {
         Log.e(TAG, "logList --- start")
         value.forEach { ele ->
             ele?.apply {
@@ -57,7 +66,8 @@ object LogFunc {
         Log.e(TAG, "logList --- end")
     }
 
-    private fun logMap(value: Map<*, *>) {
+    @JvmStatic
+    fun logMap(value: Map<*, *>) {
         Log.e(TAG, "logMap --- start")
         value.entries.forEach { entry ->
             Log.e(
@@ -91,6 +101,11 @@ fun main() {
     /**
      * 将 LogFunc 的 smali 放入待注入 apk 的 smali 里面，然后需要打印的地方就可以直接调用该代码
      * invoke-static {v0}, Lcom/aprz/smali/functions/LogFunc;->logObject(Ljava/lang/Object;)V
+     * 这里少了一个强制转换，不太好用，还是直接调用对应类型的方法比较好
+     *
      */
     LogFunc.logObject(45)
+    LogFunc.logInt(32)
+    LogFunc.logBoolean(false)
+
 }
